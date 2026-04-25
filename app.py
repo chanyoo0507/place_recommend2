@@ -1,6 +1,6 @@
 import streamlit as st
 
-if places not in st.session_state:
+if "places" not in st.session_state:
     st.session_state.places = [
         {"이름":"속초 해수욕장","실내여부":"실외","비용":0,"평점":4.3,"개장시간":9,"폐장시간":18,"평균인파":15000},
         {"이름":"엑스포공원","실내여부":"실외","비용":0,"평점":4.5,"개장시간":0,"폐장시간":24,"평균인파":3000},
