@@ -62,7 +62,7 @@ elif menu == "추천 받기":
     if rate_mode != "전부":
         rate = st.number_input("평점을 입력하세요",min_value=0, step=0.1,max_value=5)
         result_input = result
-        result = place_search_by_number(result_input,"비용",rate,rate_mode)
+        result = place_search_by_number(result_input,"평점",rate,rate_mode)
     time_mode = st.selectbox("방문 시간 검색 방식을 선택하세요", ["전부", "선택"])
     if time_mode != "전부":
         time = st.number_input("방문 시각을 입력하세요",min_value=0, step=1,max_value=24)
@@ -74,7 +74,7 @@ elif menu == "추천 받기":
     if population_mode != "전부":
         population = st.number_input("평균 인파를 입력하세요",min_value=0, step=1000)
         result_input = result
-        result = place_search_by_number(result_input,"비용",population,population_mode)
+        result = place_search_by_number(result_input,"평균인파",population,population_mode)
     st.subheader("추천 결과")
     place_output(result)
 elif menu == "장소 추가":
