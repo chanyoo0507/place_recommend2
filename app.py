@@ -27,7 +27,7 @@ def place_search_by_category(place_list,key,value):
 def place_search_by_number(place_list,key,value,mode):
     result = []
     for place in place_list:
-        if mode == "전부" or (mode == "기준 이상", place[key] >= value) or (mode == "기준 이하", place[key] <= value):
+        if mode == "전부" or (mode == "기준 이상" and place[key] >= value) or (mode == "기준 이하" and place[key] <= value):
             result.append(place)
     return result
 
