@@ -42,3 +42,23 @@ def place_add(place_list,name,indoor,cost,rate,open,close,population):
     }
     place_list.append(new_place)
 
+st.title("강원생활도우미앱")
+
+menu = st.selectbox("기능을 선택하세요", ["전체 보기", "추천 받기", "장소 추가"])
+
+if menu == "전체 보기":
+    place_output(places)
+elif menu == "추천 받기":
+    indoor = st.selectbox("실내여부를 선택하세요", ["전부", "실내", "실외"])
+    result = place_search_by_category(places,"실내여부",indoor)
+    cost_mode = st.selectbox("비용 검색 기준을 선택하세요", ["전부", "기준 이상", "기준 이하"])
+    if cost_mode != "전부":
+        cost = st.number_input("비용을 입력하세요")
+        result_input = result
+        result = place_search_by_number(result_input,"비용",cost,cost_mode)
+    rate_mode = st.selectbox("평점 검색 기준을 선택하세요", ["전부", "기준 이상", "기준 이하"])
+    if rate_mode != "전부":
+        rate = st.number_input("평점을 입력하세요")
+        result_input = result
+        result = place_search_by_number(result_input,"비용",rate,rate_mode)
+    
