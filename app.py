@@ -80,11 +80,11 @@ elif menu == "추천 받기":
 elif menu == "장소 추가":
     name = st.text_input("장소 이름을 입력하세요")
     indoor = st.selectbox("실내/실외를 선택하세요", ["실내", "실외"])
-    cost = st.number_input("예산을 입력하세요", min_value=0, step=1000)
-    rate = st.number_input("평점을 입력하세요", min_value=0, step=0.1,max_value=5)
-    open = st.number_input("개장시간을 입력하세요", min_value=0, step=1,max_value=24)
-    close = st.number_input("폐장시간을 입력하세요", min_value=0, step=1,max_value=24)
-    population = st.number_input("평균인파를 입력하세요", min_value=0, step=1000)
+    cost = st.number_input("새 장소의 예산을 입력하세요", min_value=0, step=1000)
+    rate = st.number_input("새 장소의 평점을 입력하세요", min_value=0, step=0.1,max_value=5)
+    open = st.number_input("새 장소의 개장시간을 입력하세요", min_value=0, step=1,max_value=24)
+    close = st.number_input("새 장소의 폐장시간을 입력하세요", min_value=0, step=1,max_value=24)
+    population = st.number_input("새 장소의 평균인파를 입력하세요", min_value=0, step=1000)
 
     if st.button("장소 추가"):
         place_add(st.session_state.places,name,indoor,cost,rate,open,close,population)
