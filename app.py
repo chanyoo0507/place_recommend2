@@ -52,7 +52,7 @@ if menu == "전체 보기":
     place_output(st.session_state.places)
 elif menu == "추천 받기":
     indoor = st.selectbox("실내여부를 선택하세요", ["전부", "실내", "실외"])
-    result = place_search_by_category(places,"실내여부",indoor)
+    result = place_search_by_category(st.session_state.places,"실내여부",indoor)
     cost_mode = st.selectbox("비용 검색 기준을 선택하세요", ["전부", "기준 이상", "기준 이하"])
     if cost_mode != "전부":
         cost = st.number_input("비용을 입력하세요",min_value=0, step=1000)
@@ -87,5 +87,5 @@ elif menu == "장소 추가":
     population = st.number_input("평균인파를 입력하세요", min_value=0, step=1000)
 
     if st.button("장소 추가"):
-        place_add(place_list,name,indoor,cost,rate,open,close,population)
+        place_add(st.session_state.places,name,indoor,cost,rate,open,close,population)
         st.success("새 장소가 추가되었습니다")
