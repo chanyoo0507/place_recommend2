@@ -67,10 +67,8 @@ elif menu == "추천 받기":
     time_mode = st.radio("방문 시간 검색 방식을 선택하세요", ["전부", "선택"])
     if time_mode != "전부":
         time = st.number_input("방문 시각을 입력하세요",min_value=0, step=1,max_value=24)
-        result_input = result
-        result = place_search_by_number(result_input,"개장시간",time,"기준 이하")
-        result_input = result
-        result = place_search_by_number(result_input,"폐장시간",time,"기준 이상")
+        result = place_search_by_number(result,"개장시간",time,"기준 이하")
+        result = place_search_by_number(result,"폐장시간",time,"기준 이상")
     result = place_search_by_number_total(result,"평균인파",0,1000)
     st.subheader("추천 결과")
     place_output(result)
