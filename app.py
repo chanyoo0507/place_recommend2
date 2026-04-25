@@ -70,9 +70,9 @@ elif menu == "추천 받기":
         result = place_search_by_number(result_input,"개장시간",time,"기준 이하")
         result_input = result
         result = place_search_by_number(result_input,"폐장시간",time,"기준 이상")
-    population_mode = st.selectbox("평점 검색 기준을 선택하세요", ["전부", "기준 이상", "기준 이하"])
+    population_mode = st.selectbox("평균 인파 검색 기준을 선택하세요", ["전부", "기준 이상", "기준 이하"])
     if population_mode != "전부":
-        population = st.number_input("평점을 입력하세요",min_value=0, step=1000)
+        population = st.number_input("평균 인파를 입력하세요",min_value=0, step=1000)
         result_input = result
         result = place_search_by_number(result_input,"비용",population,population_mode)
     st.subheader("추천 결과")
