@@ -43,11 +43,11 @@ def place_add(place_list,name,indoor,cost,rate,open,close,population):
     }
     place_list.append(new_place)
 
-def place_search_by_number_total(result_input,key,key_korean,min,step_value):
-    mode = st.radio(key_korean + " 검색 기준을 선택하세요", ["전부", "기준 이상", "기준 이하"])
+def place_search_by_number_total(result_input,key,min,step_value):
+    mode = st.radio(key + " 검색 기준을 선택하세요", ["전부", "기준 이상", "기준 이하"])
     if mode != "전부":
-        value = st.number_input(key_korean + "을(를) 입력하세요",min_value=min, step=step_value)
-        result = place_search_by_number(result_input,key_korean,value,mode)
+        value = st.number_input(key + "을(를) 입력하세요",min_value=min, step=step_value)
+        result = place_search_by_number(result_input,key,value,mode)
         return result
     else:
         return result_input
@@ -62,7 +62,7 @@ if menu == "전체 보기":
 elif menu == "추천 받기":
     indoor = st.selectbox("실내여부를 선택하세요", ["전부", "실내", "실외"])
     result = place_search_by_category(st.session_state.places,"실내여부",indoor)
-    result = place_search_by_number_total(result,cost,"비용",0,1000)
+    result = place_search_by_number_total(result,"비용",0,1000)
     #cost_mode = st.radio("비용 검색 기준을 선택하세요", ["전부", "기준 이상", "기준 이하"])
     #if cost_mode != "전부":
     #    cost = st.number_input("비용을 입력하세요",min_value=0, step=1000)
