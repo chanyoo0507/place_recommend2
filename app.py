@@ -16,8 +16,29 @@ def place_output(result):
                 st.write(key, " : ", place[key])
             st.write("---")
 
-def place_search(place_list,indoor,cost,rate,visit_time,population):
+def place_search_by_category(place_list,key,value):
     result = []
     for place in place_list:
-        if (place["실내여부"] == indoor or indoor == "전부") and place["비용"] <= cost:
+        if (place[key] == value or value == "전부"):
             result.append(place)
+    return result
+
+def place_search_by_number(place_list,key,value,mode):
+    result = []
+    for place in place_list:
+        if mode == "전부" or (mode == "기준 이상", place[key] >= value) or (mode == "기준 이하", place[key] <= value):
+            result.append(place)
+    return result
+
+def place_add(place_list,name,indoor,cost,rate,open,close,population):
+    new_place = {
+        "이름": name,
+        "실내여부": indoor,
+        "예산": cost,
+        "평점": rate,
+        "개장시간": open,
+        "폐장시간": close,
+        "평균인파": population
+    }
+    place_list.append(new_place)
+
