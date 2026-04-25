@@ -60,7 +60,7 @@ elif menu == "추천 받기":
         result = place_search_by_number(result_input,"비용",cost,cost_mode)
     rate_mode = st.radio("평점 검색 기준을 선택하세요", ["전부", "기준 이상", "기준 이하"])
     if rate_mode != "전부":
-        rate = st.number_input("평점을 입력하세요",min_value=0, step=1,max_value=5)
+        rate = st.number_input("평점을 입력하세요",min_value=0.0, step=0.1,max_value=5.0)
         result_input = result
         result = place_search_by_number(result_input,"평점",rate,rate_mode)
     time_mode = st.radio("방문 시간 검색 방식을 선택하세요", ["전부", "선택"])
