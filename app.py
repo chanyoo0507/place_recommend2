@@ -53,24 +53,24 @@ if menu == "전체 보기":
 elif menu == "추천 받기":
     indoor = st.selectbox("실내여부를 선택하세요", ["전부", "실내", "실외"])
     result = place_search_by_category(st.session_state.places,"실내여부",indoor)
-    cost_mode = st.selectbox("비용 검색 기준을 선택하세요", ["전부", "기준 이상", "기준 이하"])
+    cost_mode = st.radio("비용 검색 기준을 선택하세요", ["전부", "기준 이상", "기준 이하"])
     if cost_mode != "전부":
         cost = st.number_input("비용을 입력하세요",min_value=0, step=1000)
         result_input = result
         result = place_search_by_number(result_input,"비용",cost,cost_mode)
-    rate_mode = st.selectbox("평점 검색 기준을 선택하세요", ["전부", "기준 이상", "기준 이하"])
+    rate_mode = st.radio("평점 검색 기준을 선택하세요", ["전부", "기준 이상", "기준 이하"])
     if rate_mode != "전부":
         rate = st.number_input("평점을 입력하세요",min_value=0, step=0.1,max_value=5)
         result_input = result
         result = place_search_by_number(result_input,"평점",rate,rate_mode)
-    time_mode = st.selectbox("방문 시간 검색 방식을 선택하세요", ["전부", "선택"])
+    time_mode = st.radio("방문 시간 검색 방식을 선택하세요", ["전부", "선택"])
     if time_mode != "전부":
         time = st.number_input("방문 시각을 입력하세요",min_value=0, step=1,max_value=24)
         result_input = result
         result = place_search_by_number(result_input,"개장시간",time,"기준 이하")
         result_input = result
         result = place_search_by_number(result_input,"폐장시간",time,"기준 이상")
-    population_mode = st.selectbox("평균 인파 검색 기준을 선택하세요", ["전부", "기준 이상", "기준 이하"])
+    population_mode = st.radio("평균 인파 검색 기준을 선택하세요", ["전부", "기준 이상", "기준 이하"])
     if population_mode != "전부":
         population = st.number_input("평균 인파를 입력하세요",min_value=0, step=1000)
         result_input = result
@@ -81,9 +81,9 @@ elif menu == "장소 추가":
     name = st.text_input("장소 이름을 입력하세요")
     indoor = st.selectbox("실내/실외를 선택하세요", ["실내", "실외"])
     cost = st.number_input("새 장소의 예산을 입력하세요", min_value=0, step=1000)
-    rate = st.number_input("새 장소의 평점을 입력하세요", min_value=0, step=0.1,max_value=5)
-    open = st.number_input("새 장소의 개장시간을 입력하세요", min_value=0, step=1,max_value=24)
-    close = st.number_input("새 장소의 폐장시간을 입력하세요", min_value=0, step=1,max_value=24)
+    rate = st.number_input("새 장소의 평점을 입력하세요", min_value=0, step=0.1, max_value=5)
+    open = st.number_input("새 장소의 개장시간을 입력하세요", min_value=0, step=1, max_value=24)
+    close = st.number_input("새 장소의 폐장시간을 입력하세요", min_value=0, step=1, max_value=24)
     population = st.number_input("새 장소의 평균인파를 입력하세요", min_value=0, step=1000)
 
     if st.button("장소 추가"):
