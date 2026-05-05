@@ -22,3 +22,7 @@ else:
 region_count = df["지역"].value_counts()
 st.subheader("지역별 장소 개수")
 st.bar_chart(region_count)
+
+type_count = df["유형"].value_counts()
+st.subheader("유형별 장소 개수")
+st.bar_chart(type_count)
