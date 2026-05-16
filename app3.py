@@ -17,10 +17,10 @@ def print_table(table, table_name):
         st.warning("출력할 장소가 없습니다")
 
 def search_place():
-    selected_region = st.radio("지역을 선택하세요",df["지역"].unique())
-    selected_budget = st.number_input("사용 가능한 예산을 입력하세요", min_value=0,value=10000,step=1000)
-    selected_indoor = st.sidebar.selectbox("실내 여부를 선택하세요", df["실내여부"].unique())
-    result=df[(df["지역"] == selected_region) & (df["예산"] <= selected_budget)]
+    selected_region = st.sidebar.selectbox("지역을 선택하세요",df["지역"].unique())
+    selected_budget = st.sidebar.number_input("사용 가능한 예산을 입력하세요", min_value=0,value=10000,step=1000)
+    selected_indoor = st.sidebar.radio("실내 여부를 선택하세요", df["실내여부"].unique())
+    result=df[(df["지역"] == selected_region) & (df["예산"] <= selected_budget) & (df["실내여부"] == selected_indoor)]
     return result
 
 def count_chart(key):
