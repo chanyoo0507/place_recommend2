@@ -30,6 +30,7 @@ def count_chart(key):
 def average_chart(group, num):
     avg_score = df.groupby(group)[num].mean()
     st.subheader(group+"별 평균"+num)
+    st.bar_chart(avg_score)
 
 st.title("강생도 2.0")
 st.write("엑셀 파일을 업로드하면 장소 데이터를 확인할 수 있습니다.")
