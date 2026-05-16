@@ -12,7 +12,7 @@ def load_file():
 def print_table(table, table_name):
     st.subheader(table_name)
     if len(table)>0:
-        st.dataframe(result)
+        st.dataframe(table)
     else:
         st.warning("출력할 장소가 없습니다")
 
