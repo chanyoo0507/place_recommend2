@@ -8,7 +8,6 @@ def load_file():
         return df
     else:
         st.info("엑셀 파일을 업로드하면 데이터가 표시됩니다")
-        return ""
 
 def print_table(table, table_name):
     st.subheader(table_name)
@@ -32,7 +31,7 @@ st.title("강생도 2.0")
 st.write("엑셀 파일을 업로드하면 장소 데이터를 확인할 수 있습니다.")
 
 df = load_file()
-if df != "":
+if df is not None:
     print_table(df,"업로드한 장소 데이더")
 
     search_result = search_place()
