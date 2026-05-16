@@ -27,6 +27,10 @@ def count_chart(key):
     st.subheader(key+"별 장소 개수")
     st.bar_chart(key_count)
 
+def average_chart(group, num):
+    avg_score = df.groupby(group)[num].mean()
+    st.subheader(group+"별 평균"+num)
+
 st.title("강생도 2.0")
 st.write("엑셀 파일을 업로드하면 장소 데이터를 확인할 수 있습니다.")
 
@@ -39,3 +43,4 @@ if df is not None:
 
     count_chart("지역")
     count_chart("유형")
+    average_chart("지역","평점")
