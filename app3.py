@@ -18,8 +18,8 @@ def print_table(table, table_name):
 
 def how_to_search():
     selected_keys = []
+    st.subheader("검색 기준 선택하기")
     for i in df.columns:
-        st.subheader("검색 기준 선택하기")
         selected = st.checkbox(i)
         if selected == True:
             selected_keys.append[i]
