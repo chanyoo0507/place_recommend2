@@ -24,8 +24,6 @@ def how_to_search(table):
     selected_keys = []
     st.subheader("검색 기준 선택하기")
     for key in table.columns:
-        if key == "place_id" or "이름":
-            continue
         selected = st.checkbox(key)
         if selected == True:
             selected_keys.append[key]
