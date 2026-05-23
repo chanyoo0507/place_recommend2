@@ -16,6 +16,14 @@ def print_table(table, table_name):
     else:
         st.warning("출력할 장소가 없습니다")
 
+def menu_select():
+    selected_menu = [False, False, False]
+    st.subheader("검색 기준 선택하기")
+    selected_menu[0] = st.sidebar.checkbox("전체 보기")
+    selected_menu[1] = st.sidebar.checkbox("검색하기")
+    selected_menu[2] = st.sidebar.checkbox("통계 보기")
+    return selected_menu
+    
 def how_to_search():
     selected_keys = []
     st.subheader("검색 기준 선택하기")
@@ -47,12 +55,13 @@ st.write("엑셀 파일을 업로드하면 장소 데이터를 확인할 수 있
 
 df = load_file()
 if df is not None:
-    print_table(df,"업로드한 장소 데이더")
-
-    selected_keys = how_to_search()
-    search_result = search_place()
-    print_table(search_result,"추천 결과")
-
-    count_chart("지역")
-    count_chart("유형")
-    average_chart("지역","평점")
+    menu = menu_select()
+    if menu[0]:
+        print_table(df,"업로드한 장소 데이더")
+    if menu[1]:
+        search_result = search_place()
+        print_table(search_result,"추천 결과")
+    if menu[2]:
+        count_chart("지역")
+        count_chart("유형")
+        average_chart("지역","평점")
