@@ -17,21 +17,28 @@ def print_table(table, table_name):
         st.warning("출력할 장소가 없습니다")
 
 def menu_select():
-    selected_menu = [False, False, False]
-    st.sidebar.subheader("사용 기능 선택하기")
-    selected_menu[0] = st.sidebar.checkbox("전체 보기")
-    selected_menu[1] = st.sidebar.checkbox("검색하기")
-    selected_menu[2] = st.sidebar.checkbox("통계 보기")
+    selected_menu = st.sidebar.radio("사용 기능 선택하기",["전체 보기","검색하기","통계 보기"])
     return selected_menu
     
 def how_to_search():
     selected_keys = []
     st.subheader("검색 기준 선택하기")
     for i in df.columns:
+        if i == "place_id" or "이름":
+            continue
         selected = st.checkbox(i)
         if selected == True:
             selected_keys.append[i]
     return selected_keys
+
+def search_by_key(key):
+    if pd.api.types.is_numeric_dtype(df[key]):
+        selected_key = st.number_input
+    else:
+        selected_key = st.selectbox(key+"을 선택하세요",df[key].unique())
+        return df[(df[key] == selected_key)]
+        
+    
 
 def search_place():
     selected_region = st.selectbox("지역을 선택하세요",df["지역"].unique())
@@ -56,12 +63,12 @@ st.write("엑셀 파일을 업로드하면 장소 데이터를 확인할 수 있
 df = load_file()
 if df is not None:
     menu = menu_select()
-    if menu[0]:
+    if menu == "전체 보기":
         print_table(df,"업로드한 장소 데이더")
-    if menu[1]:
+    if menu == "검색하기":
         search_result = search_place()
         print_table(search_result,"추천 결과")
-    if menu[2]:
+    if menu == "통계 보기":
         count_chart("지역")
         count_chart("유형")
         average_chart("지역","평점")
