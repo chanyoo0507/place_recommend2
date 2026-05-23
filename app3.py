@@ -33,7 +33,12 @@ def how_to_search():
 
 def search_by_key(key):
     if pd.api.types.is_numeric_dtype(df[key]):
-        selected_key = st.number_input
+        whether_low_or_high = st.radio(key + "의 검색 기준",["이상","이하"]
+        selected_key = st.number_input(key + "의 상한선/하한선을 입력하세요")
+        if whether_low_or_high == "이상":
+            return df[(df[key] >= selected_key)]
+        else:
+            return df[(df[key] <= selected_key)]
     else:
         selected_key = st.selectbox(key+"을 선택하세요",df[key].unique())
         return df[(df[key] == selected_key)]
