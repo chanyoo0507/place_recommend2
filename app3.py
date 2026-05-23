@@ -26,7 +26,7 @@ def how_to_search(table):
     for key in table.columns:
         selected = st.checkbox(key)
         if selected == True:
-            selected_keys.append[key]
+            selected_keys.append(key)
     return selected_keys
 
 def search_by_key(table, key):
