@@ -53,13 +53,13 @@ def search_place(table, keys):
     #result=df[(df["지역"] == selected_region) & (df["예산"] <= selected_budget) & (df["실내여부"] == selected_indoor)]
     #return result
 
-def count_chart(key):
-    key_count = df[key].value_counts()
+def count_chart(table, key):
+    key_count = table[key].value_counts()
     st.subheader(key+"별 장소 개수")
     st.bar_chart(key_count)
 
-def average_chart(group, num):
-    avg_score = df.groupby(group)[num].mean()
+def average_chart(table, group, num):
+    avg_score = table.groupby(group)[num].mean()
     st.subheader(group+"별 평균"+num)
     st.bar_chart(avg_score)
 
@@ -76,6 +76,6 @@ if df is not None:
         search_result = search_place(df, keys)
         print_table(search_result,"추천 결과")
     if menu == "통계 보기":
-        count_chart("지역")
-        count_chart("유형")
-        average_chart("지역","평점")
+        count_chart(df,"지역")
+        count_chart(df,"유형")
+        average_chart(df,"지역","평점")
