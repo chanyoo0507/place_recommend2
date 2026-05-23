@@ -20,37 +20,40 @@ def menu_select():
     selected_menu = st.sidebar.radio("사용 기능 선택하기",["전체 보기","검색하기","통계 보기"])
     return selected_menu
     
-def how_to_search():
+def how_to_search(table):
     selected_keys = []
     st.subheader("검색 기준 선택하기")
-    for i in df.columns:
-        if i == "place_id" or "이름":
+    for key in table.columns:
+        if key == "place_id" or "이름":
             continue
-        selected = st.checkbox(i)
+        selected = st.checkbox(key)
         if selected == True:
-            selected_keys.append[i]
+            selected_keys.append[key]
     return selected_keys
 
-def search_by_key(key):
-    if pd.api.types.is_numeric_dtype(df[key]):
-        whether_low_or_high = st.radio(key + "의 검색 기준",["이상","이하"]
-        selected_key = st.number_input(key + "의 상한선/하한선을 입력하세요")
+def search_by_key(table, key):
+    if pd.api.types.is_numeric_dtype(table[key]):
+        whether_low_or_high = st.radio(table + "의 검색 기준",["이상","이하"]
+        selected_key = st.number_input(table + "의 상한선/하한선을 입력하세요")
         if whether_low_or_high == "이상":
-            return df[(df[key] >= selected_key)]
+            return table[(table[key] >= selected_key)]
         else:
-            return df[(df[key] <= selected_key)]
+            return table[(table[key] <= selected_key)]
     else:
-        selected_key = st.selectbox(key+"을 선택하세요",df[key].unique())
-        return df[(df[key] == selected_key)]
+        selected_key = st.selectbox(key+"을 선택하세요",table[key].unique())
+        return table[(table[key] == selected_key)]
         
+def search_place(table, keys):
+    output = table
+    for key in keys:
+        output = search_by_key(output, key)
+    return output
     
-
-def search_place():
-    selected_region = st.selectbox("지역을 선택하세요",df["지역"].unique())
-    selected_budget = st.number_input("사용 가능한 예산을 입력하세요", min_value=0,value=10000,step=1000)
-    selected_indoor = st.radio("실내 여부를 선택하세요", df["실내여부"].unique())
-    result=df[(df["지역"] == selected_region) & (df["예산"] <= selected_budget) & (df["실내여부"] == selected_indoor)]
-    return result
+    #selected_region = st.selectbox("지역을 선택하세요",df["지역"].unique())
+    #selected_budget = st.number_input("사용 가능한 예산을 입력하세요", min_value=0,value=10000,step=1000)
+    #selected_indoor = st.radio("실내 여부를 선택하세요", df["실내여부"].unique())
+    #result=df[(df["지역"] == selected_region) & (df["예산"] <= selected_budget) & (df["실내여부"] == selected_indoor)]
+    #return result
 
 def count_chart(key):
     key_count = df[key].value_counts()
@@ -71,7 +74,8 @@ if df is not None:
     if menu == "전체 보기":
         print_table(df,"업로드한 장소 데이더")
     if menu == "검색하기":
-        search_result = search_place()
+        keys = how_to_search(df)
+        search_result = search_place(df, keys)
         print_table(search_result,"추천 결과")
     if menu == "통계 보기":
         count_chart("지역")
