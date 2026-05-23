@@ -20,8 +20,8 @@ def how_to_search():
     selected_keys = []
     for i in df.columns:
         st.subheader("검색 기준 선택하기")
-        seleted = st.checkbox(i)
-        if selected == 1:
+        selected = st.checkbox(i)
+        if selected == True:
             selected_keys.append[i]
     return selected_keys
 
