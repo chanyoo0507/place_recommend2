@@ -18,7 +18,7 @@ def print_table(table, table_name):
 
 def menu_select():
     selected_menu = [False, False, False]
-    st.subheader("검색 기준 선택하기")
+    st.sidebar.subheader("사용 기능 선택하기")
     selected_menu[0] = st.sidebar.checkbox("전체 보기")
     selected_menu[1] = st.sidebar.checkbox("검색하기")
     selected_menu[2] = st.sidebar.checkbox("통계 보기")
