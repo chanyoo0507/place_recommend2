@@ -31,8 +31,8 @@ def how_to_search(table):
 
 def search_by_key(table, key):
     if pd.api.types.is_numeric_dtype(table[key]):
-        whether_low_or_high = st.radio(table + "의 검색 기준",["이상","이하"])
-        selected_key = st.number_input(table + "의 상한선/하한선을 입력하세요")
+        whether_low_or_high = st.radio(key + "의 검색 기준",["이상","이하"])
+        selected_key = st.number_input(key + "의 상한선/하한선을 입력하세요")
         if whether_low_or_high == "이상":
             return table[(table[key] >= selected_key)]
         else:
