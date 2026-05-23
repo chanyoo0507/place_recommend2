@@ -22,9 +22,9 @@ def menu_select():
     
 def how_to_search(table):
     selected_keys = []
-    st.subheader("검색 기준 선택하기")
+    st.sidebar.subheader("검색 기준 선택하기")
     for key in table.columns:
-        selected = st.checkbox(key)
+        selected = st.sidebar.checkbox(key)
         if selected == True:
             selected_keys.append(key)
     return selected_keys
