@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import math
 
 def load_file():
     uploaded_file = st.file_uploader("장소 데이터 엑셀 파일을 업로드하세요",type=["xlsx"])
@@ -36,7 +35,7 @@ def search_by_key(table, key):
     if pd.api.types.is_numeric_dtype(table[key]):
         whether_low_or_high = st.radio(key + "의 검색 기준",["이상","이하"])
         selected_key = st.number_input(key + "의 상한선/하한선을 입력하세요",
-                                      min_value=0,step=10**math.round(math.log(table[key].mean)))
+                                      min_value=0,step=10**round(log(table[key].mean)))
         if whether_low_or_high == "이상":
             return table[(table[key] >= selected_key)]
         else:
