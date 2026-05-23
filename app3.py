@@ -24,7 +24,7 @@ def how_to_search(table):
     selected_keys = []
     st.sidebar.subheader("검색 기준 선택하기")
     for key in table.columns:
-        if selected == "place_id" or selected == "이름":
+        if key == "place_id" or selected == "이름":
             continue
         selected = st.sidebar.checkbox(key)
         if selected == True:
