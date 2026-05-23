@@ -16,10 +16,19 @@ def print_table(table, table_name):
     else:
         st.warning("출력할 장소가 없습니다")
 
+def how_to_search():
+    selected_keys = []
+    for i in df.columns:
+        st.subheader("검색 기준 선택하기")
+        seleted = st.checkbox(i)
+        if selected == True:
+            selected_keys.append[i]
+    return selected_keys
+
 def search_place():
-    selected_region = st.sidebar.selectbox("지역을 선택하세요",df["지역"].unique())
-    selected_budget = st.sidebar.number_input("사용 가능한 예산을 입력하세요", min_value=0,value=10000,step=1000)
-    selected_indoor = st.sidebar.radio("실내 여부를 선택하세요", df["실내여부"].unique())
+    selected_region = st.selectbox("지역을 선택하세요",df["지역"].unique())
+    selected_budget = st.number_input("사용 가능한 예산을 입력하세요", min_value=0,value=10000,step=1000)
+    selected_indoor = st.radio("실내 여부를 선택하세요", df["실내여부"].unique())
     result=df[(df["지역"] == selected_region) & (df["예산"] <= selected_budget) & (df["실내여부"] == selected_indoor)]
     return result
 
@@ -40,6 +49,7 @@ df = load_file()
 if df is not None:
     print_table(df,"업로드한 장소 데이더")
 
+    selected_keys = how_to_search()
     search_result = search_place()
     print_table(search_result,"추천 결과")
 
