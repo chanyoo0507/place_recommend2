@@ -50,21 +50,21 @@ def search_recommendations(df,keys):
     for key in keys:
         if pd.api.types.is_numeric_dtype(df[key]):
             if key == "예산":
-                selected_key.append(key : st.number_input(
+                selected_key[key] = st.number_input(
                     "최대 예산",
                     min_value=0,
                     value=10000,
                     step=1000
-                ))
+                )
             elif key == "평점":
-                selected_key.append(key : st.number_input(
+                selected_key[key] = st.number_input(
                     "최소 평점",
                     min_Value=0.0,
                     value=4.0,
                     step=0.1
-                ))
+                )
         else:
-            selected_key.append(key : st.selectbox(key+"선택",df[key].unique()))
+            selected_key.append[key] = st.selectbox(key+"선택",df[key].unique())
     #selected_region = st.selectbox("지역 선택", df["지역"].unique())
     #selected_purpose = st.selectbox("추천목적 선택", df["추천목적"].unique())
     #selected_situation = st.selectbox("추천상황 선택", df["추천상황"].unique())
