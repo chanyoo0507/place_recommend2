@@ -59,7 +59,7 @@ def search_recommendations(df,keys):
             elif key == "평점":
                 selected_key[key] = st.number_input(
                     "최소 평점",
-                    min_Value=0.0,
+                    min_value=0.0,
                     value=4.0,
                     step=0.1
                 )
