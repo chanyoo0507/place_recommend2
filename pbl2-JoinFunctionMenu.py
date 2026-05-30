@@ -64,7 +64,7 @@ def search_recommendations(df,keys):
                     step=0.1
                 )
         else:
-            selected_key.append[key] = st.selectbox(key+"선택",df[key].unique())
+            selected_key[key] = st.selectbox(key+"선택",df[key].unique())
     #selected_region = st.selectbox("지역 선택", df["지역"].unique())
     #selected_purpose = st.selectbox("추천목적 선택", df["추천목적"].unique())
     #selected_situation = st.selectbox("추천상황 선택", df["추천상황"].unique())
