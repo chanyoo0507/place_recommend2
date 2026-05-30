@@ -71,14 +71,14 @@ def search_recommendations(df,keys):
     #selected_target = st.selectbox("추천대상 선택", df["추천대상"].unique())
 
     result = df
-    for key, selection in selected_key:
+    for key, value in selected_key:
         if pd.api.types.is_numeric_dtype(df[key]):
             if key == "예산":
-                result = result[(result[key] <= selection)]
+                result = result[(result[key] <= value)]
             if key == "평점":
-                result = result[(result[key] >= selection)]
+                result = result[(result[key] >= value)]
         else:
-            result = result[(result[key] == selection)]
+            result = result[(result[key] == value)]
     #result = df[
     #    (df["지역"] == selected_region) &
     #    (df["추천목적"] == selected_purpose) &
