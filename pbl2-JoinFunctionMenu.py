@@ -36,7 +36,7 @@ def show_joined_data(df):
 def how_to_search(df):
     keys=[]
     st.sidebar.subheader("검색 기준 선택")
-    for key in df.columns():
+    for key in df.columns:
         if key != "추천ID" and key != place_id:
             is_key_selected = st.sidebar.checkbox(key)
             if is_key_selected:
@@ -46,38 +46,46 @@ def how_to_search(df):
 def search_recommendations(df,keys):
     st.subheader("추천 장소 검색")
 
-    selected_key=[]
+    selected_key={}
     for key in keys:
-        if pd.api.types.is_numeric_dtype(key):
+        if pd.api.types.is_numeric_dtype(df[key]):
             if key == "예산":
-                selected_key.append(st.number_input(
+                selected_key.append(key : st.number_input(
                     "최대 예산",
                     min_value=0,
                     value=10000,
                     step=1000
                 ))
             elif key == "평점":
-                selected_key.append(st.number_input(
+                selected_key.append(key : st.number_input(
                     "최소 평점",
                     min_Value=0.0,
                     value=4.0,
                     step=0.1
                 ))
         else:
-            selected_key.append(st.selectbox(key+"선택",df[key].unique()))
+            selected_key.append(key : st.selectbox(key+"선택",df[key].unique()))
     #selected_region = st.selectbox("지역 선택", df["지역"].unique())
     #selected_purpose = st.selectbox("추천목적 선택", df["추천목적"].unique())
     #selected_situation = st.selectbox("추천상황 선택", df["추천상황"].unique())
     #selected_target = st.selectbox("추천대상 선택", df["추천대상"].unique())
 
-    for key in selected_key
-    result = df[
-        (df["지역"] == selected_region) &
-        (df["추천목적"] == selected_purpose) &
-        (df["추천상황"] == selected_situation) &
-        (df["추천대상"] == selected_target) &
-        (df["예산"] <= selected_budget)
-    ]
+    result = df
+    for key, selection in selected_key:
+        if pd.api.types.is_numeric_dtype(df[key]):
+            if key == "예산":
+                result = result[(result[key] <= selection)]
+            if key == "평점":
+                result = result[(result[key] >= selection)]
+        else:
+            result = result[(result[key] == selection)]
+    #result = df[
+    #    (df["지역"] == selected_region) &
+    #    (df["추천목적"] == selected_purpose) &
+    #    (df["추천상황"] == selected_situation) &
+    #    (df["추천대상"] == selected_target) &
+    #    (df["예산"] <= selected_budget)
+    #]
 
     st.subheader("검색 결과")
 
