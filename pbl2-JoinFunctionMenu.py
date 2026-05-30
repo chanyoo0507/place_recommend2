@@ -37,7 +37,7 @@ def how_to_search(df):
     keys=[]
     st.sidebar.subheader("검색 기준 선택")
     for key in df.columns:
-        if key != "추천ID" and key != place_id:
+        if key != "추천ID" and key != "place_id":
             is_key_selected = st.sidebar.checkbox(key)
             if is_key_selected:
                 keys.append(key)
