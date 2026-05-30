@@ -71,7 +71,7 @@ def search_recommendations(df,keys):
     #selected_target = st.selectbox("추천대상 선택", df["추천대상"].unique())
 
     result = df
-    for key, value in selected_key:
+    for key, value in selected_key.items():
         if pd.api.types.is_numeric_dtype(df[key]):
             if key == "예산":
                 result = result[(result[key] <= value)]
