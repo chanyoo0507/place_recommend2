@@ -68,7 +68,7 @@ def search_value_select(df,keys):
             values.append(st.selectbox(key+"선택",df[key].unique()))
     return values
 
-def search_recommendations(df,keys,values)
+def search_recommendations(df,keys,values):
     result = df
     for key, value in keys, values:
         if pd.api.types.is_numeric_dtype(df[key]):
