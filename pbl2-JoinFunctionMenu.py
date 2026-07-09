@@ -33,9 +33,10 @@ def show_joined_data(df):
     st.subheader("조인된 데이터")
     st.dataframe(df)
 
-def how_to_search(df):
-    keys=[]
+def search_key_select(df):
     st.sidebar.subheader("검색 기준 선택")
+    
+    keys = []
     for key in df.columns:
         if key != "추천ID" and key != "place_id":
             is_key_selected = st.sidebar.checkbox(key)
@@ -43,35 +44,33 @@ def how_to_search(df):
                 keys.append(key)
     return keys
 
-def search_recommendations(df,keys):
+def search_value_select(df,keys):
     st.subheader("추천 장소 검색")
-
-    selected_key={}
+    
+    values = []
     for key in keys:
         if pd.api.types.is_numeric_dtype(df[key]):
             if key == "예산":
-                selected_key[key] = st.number_input(
+                values.append(st.number_input(
                     "최대 예산",
                     min_value=0,
                     value=10000,
                     step=1000
-                )
+                ))
             elif key == "평점":
-                selected_key[key] = st.number_input(
+                values.append(st.number_input(
                     "최소 평점",
                     min_value=0.0,
                     value=4.0,
                     step=0.1
-                )
+                ))
         else:
-            selected_key[key] = st.selectbox(key+"선택",df[key].unique())
-    #selected_region = st.selectbox("지역 선택", df["지역"].unique())
-    #selected_purpose = st.selectbox("추천목적 선택", df["추천목적"].unique())
-    #selected_situation = st.selectbox("추천상황 선택", df["추천상황"].unique())
-    #selected_target = st.selectbox("추천대상 선택", df["추천대상"].unique())
+            values.append(st.selectbox(key+"선택",df[key].unique()))
+    return values
 
+def search_recommendations(df,keys,values)
     result = df
-    for key, value in selected_key.items():
+    for key, value in keys, values:
         if pd.api.types.is_numeric_dtype(df[key]):
             if key == "예산":
                 result = result[(result[key] <= value)]
@@ -79,20 +78,8 @@ def search_recommendations(df,keys):
                 result = result[(result[key] >= value)]
         else:
             result = result[(result[key] == value)]
-    #result = df[
-    #    (df["지역"] == selected_region) &
-    #    (df["추천목적"] == selected_purpose) &
-    #    (df["추천상황"] == selected_situation) &
-    #    (df["추천대상"] == selected_target) &
-    #    (df["예산"] <= selected_budget)
-    #]
-
-    st.subheader("검색 결과")
-
-    if len(result) > 0:
-        st.dataframe(result)
-    else:
-        st.warning("조건에 맞는 추천 장소가 없습니다.")
+    
+    return result
 
 
 def show_chart(df):
@@ -129,8 +116,16 @@ if uploaded_file is not None:
         show_joined_data(merged_df)
 
     elif menu == "추천 검색":
-        search_keys = how_to_search(merged_df)
-        search_recommendations(merged_df,search_keys)
+        keys = search_key_select(merged_df)
+        values = search_value_select(merged_df,keys)
+        result = search_recommendations(merged_df,keys,values)
+        
+        st.subheader("검색 결과")
+    
+        if len(result) > 0:
+            st.dataframe(result)
+        else:
+            st.warning("조건에 맞는 추천 장소가 없습니다.")
 
     elif menu == "데이터 시각화":
         show_chart(merged_df)
