@@ -71,6 +71,8 @@ def search_value_select(df,keys):
 def search_recommendations(df,keys,values):
     result = df
     for i in range(0,len(keys)):
+        key = keys[i]
+        value = values[i]
         if pd.api.types.is_numeric_dtype(df[key]):
             if key == "예산":
                 result = result[(result[key] <= value)]
