@@ -24,11 +24,11 @@ def join_data(place_df, recommend_df):
 def show_original_data(place_df, recommend_df):
     st.subheader("장소정보 시트")
     st.dataframe(place_df)
-    print(place_df)
+    st.code(place_df)
 
     st.subheader("추천정보 시트")
     st.dataframe(recommend_df)
-    print(recommend_df)
+    st.code(recommend_df)
 
 
 def show_joined_data(df):
