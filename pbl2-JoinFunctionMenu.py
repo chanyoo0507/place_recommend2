@@ -137,7 +137,7 @@ if uploaded_file is not None:
         values = search_value_select(merged_df,keys)
         search_result = search_recommendations(merged_df,keys,values)
         
-        sort_option = st.selectbox('정렬 기준 선택',['정렬 없음','평점 우선','예산 우선'])
+        sort_option = st.selectbox('평점 및 예산 복합 정렬',['정렬 없음','평점 우선','예산 우선'])
         sort_result = sort_data(search_result,sort_option)
         result = sort_result
 
