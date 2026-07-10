@@ -83,6 +83,21 @@ def search_recommendations(df,keys,values):
     
     return result
 
+def sort_data(df, how):
+    # 원본을 보호하기 위해 복사본 생성
+    sorted_df = df.copy()
+
+    if how == '평점 우선':
+        # 평점은 내림차순(False), 예산은 오름차순(True)
+        sorted_df = sorted_df.sort_values(by=['평점', '예산'], ascending=[False, True])
+    elif how == '예산 우선':
+        # 예산은 오름차순(True), 평점은 내림차순(False)
+        sorted_df = sorted_df.sort_values(by=['예산', '평점'], ascending=[True, False])
+    else:
+        # 올바르지 않은 입력이면 정렬 없이 반환
+        return df
+
+    return sorted_df
 
 def show_chart(df):
     st.subheader("데이터 시각화")
@@ -120,8 +135,12 @@ if uploaded_file is not None:
     elif menu == "추천 검색":
         keys = search_key_select(merged_df)
         values = search_value_select(merged_df,keys)
-        result = search_recommendations(merged_df,keys,values)
+        search_result = search_recommendations(merged_df,keys,values)
         
+        sort_option = st.selectbox('정렬 기준 선택',['정렬 없음','평점 우선','예산 우선'])
+        sort_result = sort_data(search_result,sort_option)
+        result = sort_result
+
         st.subheader("검색 결과")
     
         if len(result) > 0:
